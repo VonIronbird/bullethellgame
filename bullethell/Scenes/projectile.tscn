@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://drxh0nr1v5hgq"]
+
+[ext_resource type="Script" uid="uid://b4sk6f8rk73o1" path="res://Scrips/projectile.gd" id="1_yr2qt"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_f8cdk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f8cdk"]
+radius = 3.0
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_yr2qt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.7881395e-07, 0)
+scale = Vector2(5.999999, 5.9999995)
+texture = SubResource("PlaceholderTexture2D_f8cdk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f8cdk")
+debug_color = Color(0.70627356, 0.3403525, 0.8827417, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-3, -3, 6, 6)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cihqf1alby174"]
+
+[ext_resource type="Script" uid="uid://jyfgns4rinl2" path="res://Scrips/enemy.gd" id="1_hghv2"]
+[ext_resource type="Texture2D" uid="uid://dk1k5bq75df5j" path="res://icon.svg" id="2_1f0kj"]
+[ext_resource type="PackedScene" uid="uid://drxh0nr1v5hgq" path="res://Scenes/projectile.tscn" id="2_afpow"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
+radius = 63.1981
+
+[node name="Enemy" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_hghv2")
+projectile_scene = ExtResource("2_afpow")
+pattern = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1f0kj")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_afpow")

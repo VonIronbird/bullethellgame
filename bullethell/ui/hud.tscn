@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw4t35b7wilr4"]
+
+[ext_resource type="Script" uid="uid://b7rwcalgxlk8q" path="res://Scrips/hud.gd" id="1_rbyyf"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rbyyf")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 77.0
+offset_bottom = 39.0
+text = "Score: 0"
+
+[node name="LivesLabel" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 73.0
+offset_bottom = 71.0
+text = "Lives: 3"
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+offset_left = 570.0
+offset_top = 344.0
+offset_right = 662.0
+offset_bottom = 367.0
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartLabel" type="Label" parent="."]
+visible = false
+offset_left = 530.0
+offset_top = 379.0
+offset_right = 698.0
+offset_bottom = 402.0
+text = "Press Enter to Restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BossHealthBar" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 10.0
+offset_right = 150.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="BossHealthBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0250001
+anchor_bottom = 0.5
+offset_bottom = 19.999996
+value = 100.0
+
+[node name="Label" type="Label" parent="BossHealthBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "BOSS"

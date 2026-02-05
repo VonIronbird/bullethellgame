@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvcv3ot0thyr0"]
+
+[ext_resource type="PackedScene" uid="uid://ckssqmtqr6k6w" path="res://Scenes/player.tscn" id="1_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://cihqf1alby174" path="res://Scenes/enemy.tscn" id="2_3dryh"]
+[ext_resource type="PackedScene" uid="uid://drxh0nr1v5hgq" path="res://Scenes/projectile.tscn" id="3_wowpa"]
+[ext_resource type="PackedScene" uid="uid://cw4t35b7wilr4" path="res://ui/hud.tscn" id="4_3dryh"]
+
+[node name="Game" type="Node2D"]
+process_mode = 3
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_wrm1d")]
+position = Vector2(615, 654)
+
+[node name="Enemy" parent="." instance=ExtResource("2_3dryh")]
+position = Vector2(611.99994, 65)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Projectile" parent="." instance=ExtResource("3_wowpa")]
+position = Vector2(611, 70.00001)
+
+[node name="HUD" parent="." instance=ExtResource("4_3dryh")]
