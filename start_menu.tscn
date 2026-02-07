@@ -1,0 +1,127 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1n6s3m8p4u7v"]
+
+[ext_resource type="Script" uid="uid://c6ukf0r6r3t2y" path="res://Scrips/start_menu.gd" id="1_3m7e1"]
+[ext_resource type="Script" uid="uid://c23ilbms88h0l" path="res://addons/midi/MidiMusicPlayer.gd" id="2_jgtwh"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3m7e1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0627451, 0.0705882, 0.0941176, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "BULLET HELL"
+horizontal_alignment = 1
+
+[node name="DifficultyRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="DifficultyLabel" type="Label" parent="CenterContainer/VBoxContainer/DifficultyRow"]
+layout_mode = 2
+text = "Difficulty"
+
+[node name="DifficultySelect" type="OptionButton" parent="CenterContainer/VBoxContainer/DifficultyRow"]
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 52)
+layout_mode = 2
+text = "Start"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 52)
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 52)
+layout_mode = 2
+text = "Quit"
+
+[node name="SettingsOverlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="SettingsCenter" type="CenterContainer" parent="SettingsOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsPanel" type="PanelContainer" parent="SettingsOverlay/SettingsCenter"]
+layout_mode = 2
+
+[node name="SettingsVBox" type="VBoxContainer" parent="SettingsOverlay/SettingsCenter/SettingsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="SettingsLabel" type="Label" parent="SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="VolumeRow" type="HBoxContainer" parent="SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="VolumeLabel" type="Label" parent="SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox/VolumeRow"]
+layout_mode = 2
+text = "Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox/VolumeRow"]
+custom_minimum_size = Vector2(240, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="BackButton" type="Button" parent="SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox"]
+custom_minimum_size = Vector2(220, 48)
+layout_mode = 2
+text = "Back"
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_jgtwh")
+midi_path = "res://Assets/music/menu.mid"
