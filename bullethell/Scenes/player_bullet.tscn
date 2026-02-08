@@ -1,24 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://c53y1nihp4dpx"]
+[gd_scene load_steps=5 format=3 uid="uid://c53y1nihp4dpx"]
 
 [ext_resource type="Script" uid="uid://by65hd4mln48h" path="res://Scrips/player_bullet.gd" id="1_bg8x2"]
+[ext_resource type="Texture2D" uid="uid://wshjux1ie4fq" path="res://Assets/FoxShotSheet.png" id="2_3m2mg"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3m2mg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jskx8"]
+atlas = ExtResource("2_3m2mg")
+region = Rect2(66, 113, 11, 17)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jskx8"]
 radius = 3.0
 
 [node name="PlayerBullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_bg8x2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(2.5027991e-06, 0.5347913, 0.74218345, 1)
-position = Vector2(1.4901161e-07, 2.9802322e-08)
-scale = Vector2(6, 6)
-texture = SubResource("PlaceholderTexture2D_3m2mg")
+position = Vector2(-0.12499978, -0.29999927)
+scale = Vector2(0.74999994, 0.7500001)
+texture = SubResource("AtlasTexture_jskx8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_jskx8")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -1)
-rect = Rect2(-3, -2, 6, 6)
+rect = Rect2(-3, -4, 6, 6)
