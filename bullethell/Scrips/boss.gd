@@ -36,7 +36,6 @@ var _last_phase: BossPhase = BossPhase.PHASE_1
 func _ready() -> void:
 	add_to_group("enemy")
 	add_to_group("boss")
-	_apply_difficulty()
 	hp = max_hp
 	player = get_tree().get_first_node_in_group("player")
 
@@ -49,20 +48,6 @@ func _ready() -> void:
 	emit_signal("health_changed", hp, max_hp)
 	_update_phase()
 	_start_phase_timer()
-
-func _apply_difficulty() -> void:
-	match GameManager.difficulty:
-		GameManager.Difficulty.EASY:
-			fire_rate *= 1.2
-			fire_speed *= 0.9
-		GameManager.Difficulty.HARD:
-			fire_rate *= 0.8
-			fire_speed *= 1.15
-			spread_count += 3
-			ring_count += 8
-			spiral_step_deg = max(8.0, spiral_step_deg * 0.7)
-		_:
-			pass
 
 func _start_phase_timer() -> void:
 	await get_tree().create_timer(phase_duration).timeout
