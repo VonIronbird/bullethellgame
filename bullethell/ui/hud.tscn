@@ -1,64 +1,307 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw4t35b7wilr4"]
+[gd_scene load_steps=9 format=3 uid="uid://cw4t35b7wilr4"]
 
 [ext_resource type="Script" uid="uid://b7rwcalgxlk8q" path="res://Scrips/hud.gd" id="1_rbyyf"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0p1g0"]
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8l2qk"]
+bg_color = Color(0.1, 0.1, 0.12, 0.8)
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_bg"]
+bg_color = Color(0.08, 0.08, 0.1, 0.9)
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_fill"]
+bg_color = Color(0.9, 0.2, 0.24, 0.95)
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_panel"]
+bg_color = Color(0.08, 0.08, 0.1, 0.9)
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+content_margin_left = 18.0
+content_margin_right = 18.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_charge_bg"]
+bg_color = Color(0.08, 0.1, 0.12, 0.9)
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_charge_fill"]
+bg_color = Color(0.2, 0.75, 1, 0.95)
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
 [node name="HUD" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_rbyyf")
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="HUDRoot" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TopLeftPanel" type="PanelContainer" parent="HUDRoot"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 77.0
-offset_bottom = 39.0
-text = "Score: 0"
+offset_right = 240.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0p1g0")
 
-[node name="LivesLabel" type="Label" parent="."]
-offset_left = 16.0
-offset_top = 48.0
-offset_right = 73.0
-offset_bottom = 71.0
-text = "Lives: 3"
+[node name="MarginContainer" type="MarginContainer" parent="HUDRoot/TopLeftPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="GameOverLabel" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDRoot/TopLeftPanel/MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 0
+
+[node name="ScoreLabel" type="Label" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer"]
+text = "SCORE: 0"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.96, 0.96, 0.98, 1)
+
+[node name="LivesLabel" type="Label" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer"]
+text = "LIVES: 3"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.88, 0.88, 0.9, 1)
+
+[node name="ChargeContainer" type="HBoxContainer" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer"]
+theme_override_constants/separation = 8
+
+[node name="ChargeLabel" type="Label" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer/ChargeContainer"]
+text = "CHARGE"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+
+[node name="ChargeBar" type="ProgressBar" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer/ChargeContainer"]
+custom_minimum_size = Vector2(120, 10)
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+value = 0.0
+theme_override_styles/background = SubResource("StyleBoxFlat_charge_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_charge_fill")
+
+[node name="ShieldContainer" type="HBoxContainer" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer"]
+theme_override_constants/separation = 8
+
+[node name="ShieldLabel" type="Label" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer/ShieldContainer"]
+text = "SHIELD"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.6, 0.95, 1, 1)
+
+[node name="ShieldBar" type="ProgressBar" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer/ShieldContainer"]
+custom_minimum_size = Vector2(120, 10)
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+value = 0.0
+theme_override_styles/background = SubResource("StyleBoxFlat_charge_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_charge_fill")
+
+[node name="StageLabel" type="Label" parent="HUDRoot/TopLeftPanel/MarginContainer/VBoxContainer"]
+text = "STAGES CLEARED: 0"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
+
+[node name="BossHealthBar" type="PanelContainer" parent="HUDRoot"]
 visible = false
-offset_left = 570.0
-offset_top = 344.0
-offset_right = 662.0
-offset_bottom = 367.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 10.0
+offset_right = 240.0
+offset_bottom = 54.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8l2qk")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUDRoot/BossHealthBar"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUDRoot/BossHealthBar/MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="BossLabel" type="Label" parent="HUDRoot/BossHealthBar/MarginContainer/HBoxContainer"]
+text = "BOSS"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="PhaseLabel" type="Label" parent="HUDRoot/BossHealthBar/MarginContainer/HBoxContainer"]
+text = "PHASE 1"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.9, 0.9, 0.92, 1)
+
+[node name="HealthBar" type="ProgressBar" parent="HUDRoot/BossHealthBar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(360, 16)
+size_flags_horizontal = 3
+value = 100.0
+theme_override_styles/background = SubResource("StyleBoxFlat_boss_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_boss_fill")
+
+[node name="GameOverContainer" type="CenterContainer" parent="HUDRoot"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDRoot/GameOverContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -40.0
+offset_right = 220.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="HUDRoot/GameOverContainer/VBoxContainer"]
+visible = false
 text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(1, 0.88, 0.3, 1)
 
-[node name="RestartLabel" type="Label" parent="."]
+[node name="RestartLabel" type="Label" parent="HUDRoot/GameOverContainer/VBoxContainer"]
 visible = false
-offset_left = 530.0
-offset_top = 379.0
-offset_right = 698.0
-offset_bottom = 402.0
 text = "Press Enter to Restart"
 horizontal_alignment = 1
 vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.96, 0.96, 0.98, 1)
 
-[node name="BossHealthBar" type="Control" parent="."]
-layout_mode = 3
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -150.0
-offset_top = 10.0
-offset_right = 150.0
-offset_bottom = 40.0
+[node name="PauseOverlay" type="ColorRect" parent="HUDRoot"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="BossHealthBar"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0250001
-anchor_bottom = 0.5
-offset_bottom = 19.999996
-value = 100.0
+[node name="PauseCenter" type="CenterContainer" parent="HUDRoot/PauseOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="BossHealthBar"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "BOSS"
+[node name="PausePanel" type="PanelContainer" parent="HUDRoot/PauseOverlay/PauseCenter"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_pause_panel")
+
+[node name="PauseVBox" type="VBoxContainer" parent="HUDRoot/PauseOverlay/PauseCenter/PausePanel"]
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="PauseLabel" type="Label" parent="HUDRoot/PauseOverlay/PauseCenter/PausePanel/PauseVBox"]
+text = "PAUSED"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="ResumeButton" type="Button" parent="HUDRoot/PauseOverlay/PauseCenter/PausePanel/PauseVBox"]
+text = "Resume"
+custom_minimum_size = Vector2(220, 48)
+
+[node name="SettingsButton" type="Button" parent="HUDRoot/PauseOverlay/PauseCenter/PausePanel/PauseVBox"]
+text = "Settings"
+custom_minimum_size = Vector2(220, 48)
+
+[node name="MenuButton" type="Button" parent="HUDRoot/PauseOverlay/PauseCenter/PausePanel/PauseVBox"]
+text = "Main Menu"
+custom_minimum_size = Vector2(220, 48)
+
+[node name="QuitButton" type="Button" parent="HUDRoot/PauseOverlay/PauseCenter/PausePanel/PauseVBox"]
+text = "Quit"
+custom_minimum_size = Vector2(220, 48)
+
+[node name="SettingsOverlay" type="ColorRect" parent="HUDRoot"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="SettingsCenter" type="CenterContainer" parent="HUDRoot/SettingsOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsPanel" type="PanelContainer" parent="HUDRoot/SettingsOverlay/SettingsCenter"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_pause_panel")
+
+[node name="SettingsVBox" type="VBoxContainer" parent="HUDRoot/SettingsOverlay/SettingsCenter/SettingsPanel"]
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="SettingsLabel" type="Label" parent="HUDRoot/SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox"]
+text = "SETTINGS"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="VolumeRow" type="HBoxContainer" parent="HUDRoot/SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox"]
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="VolumeLabel" type="Label" parent="HUDRoot/SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox/VolumeRow"]
+text = "Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="HUDRoot/SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox/VolumeRow"]
+custom_minimum_size = Vector2(240, 24)
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="BackButton" type="Button" parent="HUDRoot/SettingsOverlay/SettingsCenter/SettingsPanel/SettingsVBox"]
+text = "Back"
+custom_minimum_size = Vector2(220, 48)
