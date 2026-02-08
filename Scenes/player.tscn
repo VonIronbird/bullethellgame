@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckssqmtqr6k6w"]
+
+[ext_resource type="Script" uid="uid://byikhpdh86pu0" path="res://Scrips/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://dk1k5bq75df5j" path="res://icon.svg" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://c53y1nihp4dpx" path="res://Scenes/player_bullet.tscn" id="2_vgqql"]
+[ext_resource type="Script" path="res://Scrips/shield.gd" id="3_shield"]
+[ext_resource type="PackedScene" uid="uid://dlaserq2t9x1y" path="res://Scenes/laser.tscn" id="4_laser"]
+[ext_resource type="PackedScene" uid="uid://dhoming8w3l2b" path="res://Scenes/homing_missile.tscn" id="5_missile"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(105.000015, 105.000015)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_aim"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_shield"]
+radius = 64.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
+scale = Vector2(0.99999994, 0.99999994)
+collision_mask = 4
+script = ExtResource("1_cvnsp")
+bullet_scene = ExtResource("2_vgqql")
+laser_scene = ExtResource("4_laser")
+missile_scene = ExtResource("5_missile")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.5000008, -0.5000008)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_6t5aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.50000113, -0.5000014)
+scale = Vector2(0.19999997, 0.19999997)
+shape = SubResource("RectangleShape2D_cvnsp")
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="AimCursor" type="Sprite2D" parent="."]
+modulate = Color(0.1, 0.9, 1, 0.8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("PlaceholderTexture2D_aim")
+
+[node name="Shield" type="Area2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("3_shield")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield"]
+shape = SubResource("CircleShape2D_shield")

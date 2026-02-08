@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlaserq2uax1y"]
+
+[ext_resource type="Script" uid="uid://b2ixq1v73vgvm" path="res://Scrips/laser.gd" id="1_laser_script"]
+[ext_resource type="Texture2D" uid="uid://wshjux1ie4fq" path="res://Assets/FoxShotSheet.png" id="2_mou6w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_laser"]
+size = Vector2(2000, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mou6w"]
+atlas = ExtResource("2_mou6w")
+region = Rect2(82, 144, 12, 16)
+
+[node name="Laser" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_laser_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(262, -1)
+shape = SubResource("RectangleShape2D_laser")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(-262, 1)
+rotation = 1.5707964
+texture = SubResource("AtlasTexture_mou6w")

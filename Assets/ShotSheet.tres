@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dbjr1hlr6k01q"]
+
+[ext_resource type="Texture2D" uid="uid://wshjux1ie4fq" path="res://Assets/FoxShotSheet.png" id="1_atmio"]
+
+[resource]
+atlas = ExtResource("1_atmio")
+region = Rect2(18, 3, 11, 10)
